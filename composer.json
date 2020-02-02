@@ -1,0 +1,46 @@
+{
+    "name": "core-extensions/shared-kernel",
+    "description": "Extended assertion library",
+    "type": "library",
+    "license": "private",
+    "require": {
+        "php": "^7.3",
+        "core-extensions/assert": "dev-master",
+        "ramsey/uuid": "^3.9",
+        "myclabs/php-enum": "^1.7",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "vimeo/psalm": "^3.8",
+        "psalm/plugin-phpunit": "^0.8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "CoreExtensions\\SharedKernel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CoreExtensions\\SharedKernel\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "cs": "php-cs-fixer fix -v --dry-run --ansi",
+        "cs-fix": "php-cs-fixer fix -v --diff --ansi",
+        "unit": "phpunit --colors=always",
+        "psalm": "psalm --diff --diff-methods --show-info=false",
+        "test": [
+            "@unit",
+            "@psalm",
+            "@cs"
+        ]
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../assert"
+        }
+    ]
+}
