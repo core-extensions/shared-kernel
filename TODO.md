@@ -1,0 +1,1 @@
+* doctrine bindings for VO
