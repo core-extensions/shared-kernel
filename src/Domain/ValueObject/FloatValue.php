@@ -14,10 +14,7 @@ class FloatValue implements ValueObject, FloatSerializable, StringSerializable
 {
     use ValueObjectTrait;
 
-    /**
-     * @var float
-     */
-    private $value = 0.0;
+    private float $value = 0.0;
 
     protected function __construct(float $value = 0.0)
     {

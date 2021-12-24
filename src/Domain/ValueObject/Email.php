@@ -11,11 +11,6 @@ use CoreExtensions\Assert\Assert;
  */
 class Email extends StringValue
 {
-    /**
-     * @param string $value
-     *
-     * @throws \InvalidArgumentException
-     */
     protected function setValue(string $value): void
     {
         $value = \mb_strtolower(\trim($value));

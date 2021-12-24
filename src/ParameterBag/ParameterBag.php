@@ -16,7 +16,7 @@ class ParameterBag implements ArraySerializable, \JsonSerializable
     /**
      * @var array<string, mixed>
      */
-    private $parameters;
+    private array $parameters;
 
     /**
      * @param array<string, mixed> $parameters

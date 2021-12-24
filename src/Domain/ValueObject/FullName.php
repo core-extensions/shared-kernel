@@ -16,18 +16,9 @@ class FullName implements ValueObject, StringSerializable, ArraySerializable
 {
     use ValueObjectTrait;
 
-    /**
-     * @var null|string
-     */
-    private $firstName;
-    /**
-     * @var null|string
-     */
-    private $middleName;
-    /**
-     * @var null|string
-     */
-    private $secondName;
+    private ?string $firstName;
+    private ?string $middleName;
+    private ?string $secondName;
 
     private function __construct(?string $firstName, ?string $secondName, ?string $middleName)
     {
@@ -83,7 +74,6 @@ class FullName implements ValueObject, StringSerializable, ArraySerializable
      */
     public static function fromArray(array $array): ArraySerializable
     {
-        /** @var array{first_name: string|null, second_name: string|null, middle_name: string|null} $array */
         return self::fromValues(
             $array['first_name'] ?? null,
             $array['second_name'] ?? null,

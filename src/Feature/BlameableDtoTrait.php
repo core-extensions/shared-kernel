@@ -6,18 +6,9 @@ namespace CoreExtensions\SharedKernel\Feature;
 
 trait BlameableDtoTrait
 {
-    /**
-     * @var null|string
-     */
-    private $createdBy;
-    /**
-     * @var null|string
-     */
-    private $updatedBy;
-    /**
-     * @var null|string
-     */
-    private $deletedBy;
+    private ?string $createdBy;
+    private ?string $updatedBy;
+    private ?string $deletedBy;
 
     public function getCreatedBy(): ?string
     {

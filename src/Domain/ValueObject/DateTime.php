@@ -62,7 +62,6 @@ class DateTime extends \DateTimeImmutable implements
         string $format = self::FORMAT,
         \DateTimeZone $timezone = null
     ): self {
-        /** @var \DateTimeImmutable $dateTime */
         $dateTime = \DateTimeImmutable::createFromFormat($format, $dateTime, $timezone);
         Assert::notEmpty($dateTime, 'Invalid date/time format.');
 
@@ -218,7 +217,6 @@ class DateTime extends \DateTimeImmutable implements
      */
     public function format($format): string
     {
-        /** @var string */
         return parent::format($format ?: static::FORMAT);
     }
 

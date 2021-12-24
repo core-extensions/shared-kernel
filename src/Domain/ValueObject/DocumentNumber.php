@@ -11,11 +11,6 @@ use CoreExtensions\Assert\Assert;
  */
 class DocumentNumber extends StringValue
 {
-    /**
-     * @param string $value
-     *
-     * @throws \InvalidArgumentException
-     */
     protected function setValue(string $value): void
     {
         Assert::stringNotEmpty(\trim($value));

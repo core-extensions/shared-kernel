@@ -12,10 +12,7 @@ class StringValue implements ValueObject, StringSerializable
 {
     use ValueObjectTrait;
 
-    /**
-     * @var string
-     */
-    private $value;
+    private string $value;
 
     protected function __construct(string $value)
     {

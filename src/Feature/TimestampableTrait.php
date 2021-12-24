@@ -6,18 +6,9 @@ namespace CoreExtensions\SharedKernel\Feature;
 
 trait TimestampableTrait
 {
-    /**
-     * @var null|\DateTimeInterface
-     */
-    private $createdAt;
-    /**
-     * @var null|\DateTimeInterface
-     */
-    private $updatedAt;
-    /**
-     * @var null|\DateTimeInterface
-     */
-    private $deletedAt;
+    private ?\DateTimeInterface $createdAt;
+    private ?\DateTimeInterface $updatedAt;
+    private ?\DateTimeInterface $deletedAt;
 
     protected function createdAt(): ?\DateTimeInterface
     {

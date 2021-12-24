@@ -14,10 +14,7 @@ class IntegerValue implements ValueObject, IntegerSerializable, StringSerializab
 {
     use ValueObjectTrait;
 
-    /**
-     * @var int
-     */
-    private $value = 0;
+    private int $value = 0;
 
     protected function __construct(int $value = 0)
     {

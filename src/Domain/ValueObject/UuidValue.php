@@ -21,10 +21,7 @@ class UuidValue implements ValueObject, StringSerializable
 {
     use ValueObjectTrait;
 
-    /**
-     * @var UuidInterface
-     */
-    private $value;
+    private UuidInterface $value;
 
     private function __construct(UuidInterface $uuid)
     {

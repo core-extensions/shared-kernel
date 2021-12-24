@@ -6,10 +6,7 @@ namespace CoreExtensions\SharedKernel\Feature;
 
 trait SoftDeleteableTrait
 {
-    /**
-     * @var bool
-     */
-    private $deleted = false;
+    private bool $deleted = false;
 
     public function delete(): void
     {

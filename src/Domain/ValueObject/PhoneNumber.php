@@ -11,11 +11,6 @@ use CoreExtensions\Assert\Assert;
  */
 class PhoneNumber extends StringValue
 {
-    /**
-     * @param string $value
-     *
-     * @throws \InvalidArgumentException
-     */
     protected function setValue(string $value): void
     {
         Assert::phoneNumber(\trim($value));

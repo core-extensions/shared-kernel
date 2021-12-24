@@ -13,7 +13,6 @@ trait ValueObjectTrait
         }
 
         $selfValue = $this->toScalar();
-        /** @var ValueObject $valueObject */
         $checkValue = $valueObject->toScalar();
 
         if (\gettype($selfValue) !== \gettype($checkValue)) {
@@ -33,8 +32,5 @@ trait ValueObjectTrait
         return $selfValue === $checkValue;
     }
 
-    /**
-     * @return mixed
-     */
     abstract public function toScalar();
 }
