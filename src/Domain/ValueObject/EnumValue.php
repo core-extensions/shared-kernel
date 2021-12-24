@@ -6,57 +6,29 @@ namespace CoreExtensions\SharedKernel\Domain\ValueObject;
 
 use CoreExtensions\SharedKernel\Domain\ValueObject;
 use CoreExtensions\SharedKernel\Domain\ValueObjectTrait;
-use CoreExtensions\SharedKernel\Feature\StringSerializable;
 use MyCLabs\Enum\Enum;
 
-abstract class EnumValue extends Enum implements ValueObject, StringSerializable
+abstract class EnumValue extends Enum implements ValueObject
 {
     use ValueObjectTrait;
 
-    public function __toString(): string
-    {
-        return $this->toString();
-    }
-
-    /**
-     * @throws \BadMethodCallException
-     *
-     * @return static
-     */
     public static function fromName(string $name): self
     {
         return static::__callStatic($name, []);
     }
 
-    /**
-     * @throws \UnexpectedValueException
-     *
-     * @return static
-     */
-    public static function fromString(string $value): StringSerializable
+    public function toScalar()
     {
-        return self::fromValue($value);
+        return $this->getValue();
     }
 
-    /**
-     * @param mixed $value
-     *
-     * @throws \UnexpectedValueException
-     *
-     * @return static
-     */
-    public static function fromValue($value): self
+    public static function fromRawValue($value): self
     {
         return new static($value);
     }
 
-    public function toString(): string
+    public function toRawValue()
     {
-        return (string)$this->getValue();
-    }
-
-    public function toScalar(): string
-    {
-        return $this->toString();
+        return $this->getValue();
     }
 }
