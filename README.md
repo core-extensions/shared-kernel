@@ -1,13 +1,13 @@
 # Shared Kernel
 
-> Common classes and interfaces
+Common classes and interfaces for supporting DDD, CQRS, EventSourcing. 
 
 ## Questions
 
-* Для чего нужны apply* и events? Почему просто не вызывать методы AR?
+* Why do you use apply* methods instead of direct changing model?
 
-Можно вызывать методы напрямую. Но использование AggregateChanged (extends DomainEvent) удобно в плане typed аргументов
-вызова, готово для реализации event-sourcing, готово для реализации push событий.
+EventSourcing friendly approach. You can change model directly and emit only required events if you're sure you won't 
+EventSourcing.
 
 ## Cases
 

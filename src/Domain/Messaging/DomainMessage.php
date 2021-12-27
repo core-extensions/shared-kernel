@@ -16,7 +16,26 @@ abstract class DomainMessage implements Message, ArraySerializable
     protected DateTime $createdAt;
     protected array $metadata = [];
 
-    abstract protected function setPayload(array $payload): void;
+    /**
+     * The payload should only contain scalar types and sub arrays.
+     * The payload is normally passed to json_encode to persist the message or
+     * push it into a message queue.
+     */
+    protected array $payload = [];
+
+    /**
+     * We should prefer using factory methods.
+     */
+    protected function __construct(array $payload = [])
+    {
+        $this->init();
+        $this->setPayload($payload);
+    }
+
+    public static function withPayload(array $payload = []): self
+    {
+        return new static($payload);
+    }
 
     public function messageName(): string
     {
@@ -36,6 +55,11 @@ abstract class DomainMessage implements Message, ArraySerializable
     public function metadata(): array
     {
         return $this->metadata;
+    }
+
+    public function payload(): array
+    {
+        return $this->payload;
     }
 
     public function withMetadata(array $metadata): Message
@@ -85,17 +109,22 @@ abstract class DomainMessage implements Message, ArraySerializable
         return $message;
     }
 
+    protected function setPayload(array $payload): void
+    {
+        $this->payload = $payload;
+    }
+
     protected function init(): void
     {
-        if ($this->uuid === null) {
+        if (null === $this->uuid) {
             $this->uuid = UuidValue::generate();
         }
 
-        if ($this->messageName === null) {
+        if (null === $this->messageName) {
             $this->messageName = \get_class($this);
         }
 
-        if ($this->createdAt === null) {
+        if (null === $this->createdAt) {
             $this->createdAt = DateTime::now();
         }
     }

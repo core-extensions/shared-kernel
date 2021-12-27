@@ -32,11 +32,10 @@ trait EventProducerTrait
      */
     protected function recordThat(AggregateChanged $event): void
     {
-        ++$this->version;
-
-        $this->recordedEvents[] = $event->withVersion($this->version);
-
         $this->apply($event);
+
+        ++$this->version;
+        $this->recordedEvents[] = $event->withVersion($this->version);
     }
 
     /**

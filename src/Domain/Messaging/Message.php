@@ -28,7 +28,7 @@ interface Message
     public function withMetadata(array $metadata): self;
 
     /**
-     * Returns new instance of message with $key => $value added to metadata
+     * Returns new instance of message with $key => $value added to metadata.
      *
      * Given value must have a scalar or array type.
      */
