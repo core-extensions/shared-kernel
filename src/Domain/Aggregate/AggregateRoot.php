@@ -2,13 +2,16 @@
 
 declare(strict_types=1);
 
-namespace CoreExtensions\SharedKernel\Domain;
+namespace CoreExtensions\SharedKernel\Domain\Aggregate;
 
 use CoreExtensions\SharedKernel\Exception\LogicException;
-use Prooph\EventSourcing\AggregateChanged;
 
 abstract class AggregateRoot
 {
+    use EventProducerTrait;
+
+    abstract protected function aggregateId(): string;
+
     final protected function apply(AggregateChanged $event): void
     {
         $handler = $this->resolveEventHandlerFor($event);

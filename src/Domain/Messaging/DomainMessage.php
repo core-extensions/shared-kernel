@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace CoreExtensions\SharedKernel\Domain\Messaging;
 
-use Assert\Assertion;
 use CoreExtensions\Assert\Assert;
 use CoreExtensions\SharedKernel\Domain\ValueObject\DateTime;
 use CoreExtensions\SharedKernel\Domain\ValueObject\UuidValue;
 use CoreExtensions\SharedKernel\Feature\ArraySerializable;
-use Ramsey\Uuid\Uuid;
 
 abstract class DomainMessage implements Message, ArraySerializable
 {
@@ -17,6 +15,8 @@ abstract class DomainMessage implements Message, ArraySerializable
     protected UuidValue $uuid;
     protected DateTime $createdAt;
     protected array $metadata = [];
+
+    abstract protected function setPayload(array $payload): void;
 
     public function messageName(): string
     {
@@ -64,9 +64,6 @@ abstract class DomainMessage implements Message, ArraySerializable
         ];
     }
 
-    /**
-     * @throws \ReflectionException
-     */
     public static function fromArray(array $array): ArraySerializable
     {
         Assert::keysExists($array, ['message_name', 'uuid', 'payload', 'metadata', 'created_at']);
@@ -83,8 +80,23 @@ abstract class DomainMessage implements Message, ArraySerializable
         $message->messageName = $array['message_name'];
         $message->metadata = $array['metadata'];
         $message->createdAt = DateTime::fromString($array['created_at']);
-        $message->payload= $array['payload'];
+        $message->setPayload($array['payload']);
 
         return $message;
+    }
+
+    protected function init(): void
+    {
+        if ($this->uuid === null) {
+            $this->uuid = UuidValue::generate();
+        }
+
+        if ($this->messageName === null) {
+            $this->messageName = \get_class($this);
+        }
+
+        if ($this->createdAt === null) {
+            $this->createdAt = DateTime::now();
+        }
     }
 }
